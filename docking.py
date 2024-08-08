@@ -1,6 +1,7 @@
 from vina import Vina
 import MDAnalysis as mda
-import numpy as np 
+import numpy as np
+import time
 
 # Functions to create box size
 
@@ -56,7 +57,15 @@ v.compute_vina_maps(center=center_receptor, box_size=adjusted_size)
 
 v.set_ligand_from_file(ligand_file)
 
+start_time = time.time()
+
 v.dock(exhaustiveness=32, n_poses=20)
+
+end_time = time.time()
+
+elapsed_time = end_time - start_time
+
+print(f"Time taken: {elapsed_time:.2f} seconds")
 
 pose = input("Provide a pose from the list:")
 
